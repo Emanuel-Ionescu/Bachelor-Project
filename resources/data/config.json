@@ -1,0 +1,72 @@
+{
+    "Rooms" : ["Livingroom", "Kitchen", "Bedroom1", "Bedroom2", "Garage"],
+
+    "Platform" : {
+
+        "GUIFeedback1" : {
+            "IP" : "192.168.1.2",
+            "PORT" : 27001
+        },
+
+        "GUIFeedback2" : {
+            "IP" : "192.168.1.2",
+            "PORT" : 27002
+        },
+
+        "ImageProcessing1" : {
+            "IP" : "192.168.1.12",
+            "PORT" : 27011
+        },
+
+        "ImageProcessing2" : {
+            "IP" : "192.168.1.12",
+            "PORT" : 27012
+        },
+
+        "HomeAssistant" : {
+            "IP" : "192.168.1.12",
+            "PORT" : 27003,
+            "Token" : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIzMmIyNjJkNjc4YWI0NDk4YThjYzAyZGIzYWI5MWI0ZCIsImlhdCI6MTczNzQ2ODEwMiwiZXhwIjoyMDUyODI4MTAyfQ.ChgzXzOin0EfoUFlz24lV5tFUSuP7AnBbbzjORGrpXk"
+        },
+
+        "WebServer" : {
+            "IP" : "192.168.1.11",
+            "PORT" : 27004
+        }
+    },
+
+    "SmartDevice" : {
+        "Light" : {
+            "Bulb1" : {
+                "IP" : "192.168.1.51",
+                "Location" : "Bedroom1"
+                }
+            
+            }
+        ,
+
+        "Outlet" : {}
+    },
+
+    "Camera" : {
+        "TapoCam1" : {
+            "IP" : "192.168.1.21",
+            "Auth" : {
+                "User" : "TapoCam1",
+                "Password" : "salut123"
+            },
+            "Command" : ["up", "down", "left", "right", "open", "close"],
+            "Location" : "Bedroom1"
+        },
+
+        "TapoCam2" : {
+            "IP" : "192.168.1.22",
+            "Auth" : {
+                "User" : "TapoCam2",
+                "Password" : "salut123"
+            },
+            "Command" : ["up", "down", "left", "right", "open", "close"],
+            "Location" : "Livingroom"
+        }
+    }
+}
