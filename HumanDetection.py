@@ -518,7 +518,7 @@ class Model:
 
         # Convert the keypoints with scores to a Person data type
 
-        if ((keypoint_with_scores[:,2] >= DEFAULT_BODY_ACCURACY).sum() == keypoint_with_scores[:,2].size).astype(np.int):
+        if ((keypoint_with_scores[:,2] >= DEFAULT_BODY_ACCURACY).sum() == keypoint_with_scores[:,2].size).astype(np.int32):
             return [
                         keypoint_with_scores[:,0] * image_height, 
                         keypoint_with_scores[:,1] * image_width, 
