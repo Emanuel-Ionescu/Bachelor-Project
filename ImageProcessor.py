@@ -51,8 +51,12 @@ def main():
     IR = ImageReceiver(IMAGE_PROCESSORS[ID-1]["IP"], IMAGE_PROCESSORS[ID-1]["PORT"])
     FDBK = UDPSender(FEEDBACKS[ID-1]["IP"], FEEDBACKS[ID-1]["PORT"])
 
-    AI = Model(use_NPU=True)
-    #AI.getDetails()
+    try:
+        AI = Model(use_NPU=True)
+        #AI.getDetails()
+    except:
+        AI = Model(use_NPU=True, download=True)
+
     loading_time = time.time() - loading_time
     t1.join()
     print("ML loaded in", loading_time, "seconds")
