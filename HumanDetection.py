@@ -12,6 +12,8 @@ from operator import itemgetter
 DEFAULT_DETECTION_ACCURACY = 0.3
 DEFAULT_RECOGNITION_ACCURACY = 0.81
 
+DEFAULT_BODY_ACCURACY = 0.3
+
 MIN_CROP_KEYPOINT_SCORE = 0.2
 TORSO_EXPANSION_RATIO = 1.9
 BODY_EXPANSION_RATIO = 1.2
@@ -516,8 +518,11 @@ class Model:
 
         # Convert the keypoints with scores to a Person data type
 
-        return [
-                    keypoint_with_scores[:,0] * image_height, 
-                    keypoint_with_scores[:,1] * image_width, 
-                    keypoint_with_scores[:,2]
-                ]
+        if ((keypoint_with_scores[:,2] >= DEFAULT_BODY_ACCURACY).sum() == keypoint_with_scores[:,2].size).astype(np.int):
+            return [
+                        keypoint_with_scores[:,0] * image_height, 
+                        keypoint_with_scores[:,1] * image_width, 
+                        keypoint_with_scores[:,2]
+                    ]
+        else:
+            return None

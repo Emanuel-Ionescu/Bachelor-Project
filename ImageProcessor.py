@@ -116,11 +116,12 @@ def main():
 
         if(option == "all" or option == "body"):
             body = AI.find_body(frame)
-            to_be_sent["body"] = {
-                    "x"     : np.array(body[0], dtype=np.int32).tolist(),
-                    "y"     : np.array(body[1], dtype=np.int32).tolist(),
-                    "score" : np.array(body[2], dtype=np.int32).tolist()
-                }
+            if body is not None:
+                to_be_sent["body"] = {
+                        "x"     : np.array(body[0], dtype=np.int32).tolist(),
+                        "y"     : np.array(body[1], dtype=np.int32).tolist(),
+                        # "score" : np.array(body[2], dtype=np.int32).tolist()
+                    }
             ECHO("Frame processed for body")
 
         to_be_sent["ID"] = ID
