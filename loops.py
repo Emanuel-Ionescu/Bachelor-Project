@@ -28,6 +28,15 @@ import queue
 ON_BOARD = False
 ON_COMPUTER = True
 
+CAMERA_RESOLUTION = (1280, 720)
+FRAME_SLICE_INFO = [
+    [int(CAMERA_RESOLUTION[0]/4), int(3 * CAMERA_RESOLUTION[0]/4), int(CAMERA_RESOLUTION[1]/4), int(3 * CAMERA_RESOLUTION[1]/4), "face,w:0.25:0.5,h:0.25:0.5"],
+    [0                          , int(CAMERA_RESOLUTION[0]/2)    , 0                          , int(CAMERA_RESOLUTION[1]/2)    , "face,w:0.00:0.5,h:0.00:0.5"],
+    [0                          , int(CAMERA_RESOLUTION[0]/2)    , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "face,w:0.50:0.5,h:0.00:0.5"],
+    [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , 0                          , int(CAMERA_RESOLUTION[1]/2)    , "face,w:0.00:0.5,h:0.50:0.5"],
+    [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "face,w:0.50:0.5,h:0.50:0.5"]
+            ]
+
 if not ON_BOARD:
     class DummyCam():
         def __init__(self):
@@ -109,7 +118,7 @@ class UpdateCamera(QThread):
                 frame = [self.raw_frame[i * 720 : (i + 1) * 720, :, :] for i in range(self.used_cams)] 
 
                 for i in range(self.used_cams):
-                    self.IS[i].send(frame[i])
+                    self.IS[i].send(frame[i], "all,w:0.0:1.0,h:0.0:1.0")
                     
                     if self.AI_data[i] is not None:
                         recv_time = float(self.AI_data[i]["sent-time"][1:])
@@ -169,10 +178,12 @@ class MoveCamera(QThread):
                     self.controller.append(
                         pytapo.Tapo(cam["IP"], cam["Auth"]["User"], cam["Auth"]["Password"])
                     )
+                print("Cams controlls seted up")
                 not_ok = False
-            except:
+            except Exception as e:
                 not_ok = True
-
+                print("Camera setup error:", e)
+                
         while True:
             if self.commands_queue.empty():
                 time.sleep(0.01)
@@ -191,7 +202,7 @@ class MoveCamera(QThread):
                 try:
                     self.controller[id].moveMotor(x, y)
                 except Exception as e:
-                    print(e)
+                    print("Camera move error:", e)
 
 class GetAIResults(QThread):
     send_json = Signal(dict, int)
