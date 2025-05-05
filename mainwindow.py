@@ -242,7 +242,7 @@ class MainWindow(QMainWindow):
             self.ui.camera_display.setPixmap(QPixmap.fromImage(image))
 
         if ROOMS_ALIASES[cam_num] == "Livingroom":
-            self.ui.user_camera_display.setPixmap(QPixmap.fromImage(image.copy(280, 0, 1000, 720)))
+            self.ui.user_camera_display.setPixmap(QPixmap.fromImage(image.copy(390, 110, 890, 610)))
 
     @Slot()
     def cam_move_pressed_up(self):
