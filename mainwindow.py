@@ -80,6 +80,12 @@ class MainWindow(QMainWindow):
         self.ui.setupUi(self)
 
     # ==========================================================================================
+    # WEB
+    # ==========================================================================================
+
+        self.web_commands_thread = loops.GetWebCommands()
+
+    # ==========================================================================================
     # LIGHTS
     # ==========================================================================================
 
@@ -129,6 +135,9 @@ class MainWindow(QMainWindow):
         self.AI_result2_thread = loops.GetAIResults(1)
         self.AI_result2_thread.send_json.connect(self.camera_thread.set_AI_results)
         self.AI_result2_thread.start()
+
+        # connection with web
+        self.web_commands_thread.send_camera_move.connect(self.camera_controll_thread.move)
 
     # ==========================================================================================
     # TEMPERATURE

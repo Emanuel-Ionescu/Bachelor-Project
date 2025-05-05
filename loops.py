@@ -14,6 +14,8 @@ FEEDBACKS = [
     hardware_data["Platform"]["GUIFeedback2"]
 ]
 
+WEBCOMMANDS = hardware_data["Platform"]["GUIWebCommands"]
+
 from PySide6.QtCore import QTimer, Signal, Slot, Qt, QThread
 from PySide6.QtGui import QPixmap, QPainter, QImage
 
@@ -215,6 +217,31 @@ class MoveCamera(QThread):
                 except Exception as e:
                     print("Camera move error:", e)
 
+class GetWebCommands(QThread):
+    send_camera_move = Signal(int, str)
+    def __init__(self):
+        self.RES = DataTransmition.UDPReceiver(WEBCOMMANDS["IP"], WEBCOMMANDS["PORT"])
+
+    def run(self):
+        while True:
+            time.sleep(0.05)
+            msg = self.RES.receive()
+
+            try:
+                msg = str(msg)
+
+                option, arg1, arg2 = msg.split(':')
+                if option == "CAMERA":
+                    for i, cam in enumerate(CAMERAS): 
+                        if cam["Location"] == arg1: 
+                            cam_id = i
+
+                    self.send_camera_move.emit(cam_id, arg2) 
+
+            except Exception as e:
+                print(e)
+
+
 class GetAIResults(QThread):
     send_json = Signal(dict, int)
     def __init__(self, index):
@@ -224,7 +251,7 @@ class GetAIResults(QThread):
 
     def run(self):
         while True:
-            time.sleep(0.1)
+            time.sleep(0.05)
             msg = self.RES.receive()
             try:
                 json_like = json.loads(msg)

@@ -13,6 +13,11 @@
             "PORT" : 27002
         },
 
+        "GUIWebCommands" : {
+            "IP" : "192.168.1.11",
+            "PORT" : 27003
+        },
+
         "ImageProcessing1" : {
             "IP" : "192.168.1.12",
             "PORT" : 27011
@@ -50,6 +55,7 @@
 
     "Camera" : {
         "TapoCam1" : {
+            "ID" : 0,
             "IP" : "192.168.1.21",
             "Auth" : {
                 "User" : "TapoCam",
@@ -60,6 +66,7 @@
         },
 
         "TapoCam2" : {
+            "ID" : 1,
             "IP" : "192.168.1.22",
             "Auth" : {
                 "User" : "TapoCam",
