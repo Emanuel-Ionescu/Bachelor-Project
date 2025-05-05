@@ -25,7 +25,7 @@ import time
 import pytapo
 import queue
 
-ON_BOARD = False
+ON_BOARD = True
 ON_COMPUTER = False
 
 CAMERA_RESOLUTION = (1280, 720)
