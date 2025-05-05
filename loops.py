@@ -152,7 +152,7 @@ class UpdateCamera(QThread):
                                     (int(g[1] * self.frame[i].shape[1]) + 7, int(g[0] * self.frame[i].shape[0]) + 7), 
                                     (255, 0, 0, 255), 6)
                         except:
-                            print("No face found!")
+                            print("No face found!", "CAM", i)
                             
                         self.AI_data[i] = None
 
