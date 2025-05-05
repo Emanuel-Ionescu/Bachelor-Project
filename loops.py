@@ -26,7 +26,7 @@ import pytapo
 import queue
 
 ON_BOARD = False
-ON_COMPUTER = True
+ON_COMPUTER = False
 
 CAMERA_RESOLUTION = (1280, 720)
 FRAME_SLICE_INFO = [
@@ -37,17 +37,22 @@ FRAME_SLICE_INFO = [
     [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "face,w:0.50:0.5,h:0.50:0.5"]
             ]
 
-if not ON_BOARD:
-    class DummyCam():
-        def __init__(self):
-            self.frame = np.random.rand(1440, 1280, 3) * 255
-            self.frame = np.array(self.frame, dtype=np.uint8)
+class VideoFakeCam():  
+    def __init__(self):
+        self.cam1 = cv2.VideoCapture("./resources/videos/emi-camera-test.mp4")
+        self.cam2 = None
 
-        def read(self):
-            return True, self.frame
-        
-        def release(self):
-            pass
+    def read(self):
+        ok1 = False
+        while ok1 is False:
+            ok1, self.frame1 = self.cam1.read()
+            if ok1 is False:
+                self.cam1.release()
+                self.cam1 = cv2.VideoCapture("./resources/videos/emi-camera-test.mp4")
+
+        self.frame1 = cv2.resize(self.frame1, (1280, 720))
+        return True, cv2.vconcat([self.frame1, self.frame1])
+    
 
 if ON_COMPUTER:
     class NonGstCam():
@@ -99,7 +104,7 @@ class UpdateCamera(QThread):
         elif ON_COMPUTER:
             self.cam = NonGstCam()
         else:
-            self.cam = DummyCam()
+            self.cam = VideoFakeCam()
 
         self.used_cams = len(CAMERAS)
         ok, self.raw_frame = self.cam.read()
@@ -115,10 +120,10 @@ class UpdateCamera(QThread):
             ok, self.raw_frame = self.cam.read()
             if ok:
                 self.raw_frame = cv2.cvtColor(self.raw_frame, cv2.COLOR_BGR2RGBA)
-                frame = [self.raw_frame[i * 720 : (i + 1) * 720, :, :] for i in range(self.used_cams)] 
+                self.frame = [self.raw_frame[i * 720 : (i + 1) * 720, :, :] for i in range(self.used_cams)] 
 
                 for i in range(self.used_cams):
-                    self.IS[i].send(frame[i], "all,w:0.0:1.0,h:0.0:1.0")
+                    self.IS[i].send(self.frame[i], "all,w:0.0:1.0,h:0.0:1.0")
                     
                     if self.AI_data[i] is not None:
                         recv_time = float(self.AI_data[i]["sent-time"][1:])
@@ -126,38 +131,44 @@ class UpdateCamera(QThread):
                             for G, score, face in zip(self.AI_data[i]["G"], self.AI_data[i]["scores"], self.AI_data[i]["faces"]):
                                 f = [float(coord) for coord in face.split(',')]
                                 g = [float(coord) for coord in G.split(',')]
-                                frame[i] = cv2.rectangle(
-                                    frame[i], 
-                                    (int(f[1] * frame[i].shape[1]), int(f[0] * frame[i].shape[0])), 
-                                    (int(f[3] * frame[i].shape[1]), int(f[2] * frame[i].shape[0])), 
+                                self.frame[i] = cv2.rectangle(
+                                    self.frame[i], 
+                                    (int(f[1] * self.frame[i].shape[1]), int(f[0] * self.frame[i].shape[0])), 
+                                    (int(f[3] * self.frame[i].shape[1]), int(f[2] * self.frame[i].shape[0])), 
                                     (255, 0, 0, 255), 2)
-                                frame[i] = cv2.putText(
-                                    frame[i], 
+                                self.frame[i] = cv2.putText(
+                                    self.frame[i], 
                                     "Score: " + score, 
-                                    (int(f[1] * frame[i].shape[1]), int(f[0] * frame[i].shape[0]) - 5),
+                                    (int(f[1] * self.frame[i].shape[1]), int(f[0] * self.frame[i].shape[0]) - 5),
                                     1, 1, (255, 0, 0, 255), 2)
-                                frame[i] = cv2.putText(
-                                    frame[i], 
+                                self.frame[i] = cv2.putText(
+                                    self.frame[i], 
                                     str(round(time.time() - recv_time, 1)) + " secs ago", 
-                                    (int(f[1] * frame[i].shape[1]), int(f[0] * frame[i].shape[0]) - 17),
+                                    (int(f[1] * self.frame[i].shape[1]), int(f[0] * self.frame[i].shape[0]) - 17),
                                     1, 1, (255, 0, 0, 255), 2)
-                                frame[i] = cv2.rectangle(
-                                    frame[i], 
-                                    (int(g[1] * frame[i].shape[1]) - 7, int(g[0] * frame[i].shape[0]) - 7), 
-                                    (int(g[1] * frame[i].shape[1]) + 7, int(g[0] * frame[i].shape[0]) + 7), 
+                                self.frame[i] = cv2.rectangle(
+                                    self.frame[i], 
+                                    (int(g[1] * self.frame[i].shape[1]) - 7, int(g[0] * self.frame[i].shape[0]) - 7), 
+                                    (int(g[1] * self.frame[i].shape[1]) + 7, int(g[0] * self.frame[i].shape[0]) + 7), 
                                     (255, 0, 0, 255), 6)
                         except:
                             print("No face found!")
                             
                         self.AI_data[i] = None
 
-                    h, w, ch = frame[i].shape
+                    h, w, ch = self.frame[i].shape
                     bytesPerLine = ch * w
-                    qt_frame = QImage(frame[i].data, w, h, bytesPerLine, QImage.Format_RGBA8888)
+                    qt_frame = QImage(self.frame[i].data, w, h, bytesPerLine, QImage.Format_RGBA8888)
                     self.changePixmap.emit(qt_frame, i)
 
     def set_AI_results(self, json_like, index):
         self.AI_data[index] = json_like
+
+    def send_frame_to_save_user(self, username):
+        self.IS[0].send(self.frame[0], "add,{},##".format(username))
+
+    def send_frame_to_remove_user(self, username):
+        self.IS[0].send(self.frame[0], "remove,{},##".format(username))
 
 class MoveCamera(QThread):
     def __init__(self):

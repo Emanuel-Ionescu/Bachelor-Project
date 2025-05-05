@@ -52,21 +52,21 @@
         "TapoCam1" : {
             "IP" : "192.168.1.21",
             "Auth" : {
-                "User" : "TapoCam1",
+                "User" : "TapoCam",
                 "Password" : "salut123"
             },
             "Command" : ["up", "down", "left", "right", "open", "close"],
-            "Location" : "Bedroom1"
+            "Location" : "Livingroom"
         },
 
         "TapoCam2" : {
             "IP" : "192.168.1.22",
             "Auth" : {
-                "User" : "TapoCam2",
+                "User" : "TapoCam",
                 "Password" : "salut123"
             },
             "Command" : ["up", "down", "left", "right", "open", "close"],
-            "Location" : "Livingroom"
+            "Location" : "Bedroom1"
         }
     }
 }

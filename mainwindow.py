@@ -130,6 +130,29 @@ class MainWindow(QMainWindow):
         self.AI_result2_thread.send_json.connect(self.camera_thread.set_AI_results)
         self.AI_result2_thread.start()
 
+    # ==========================================================================================
+    # TEMPERATURE
+    # ==========================================================================================
+
+        self.temperature_text = "{}°C\n{}"
+        self.temperature_data = [22, "Hot"]
+
+        self.ui.temperature_up_bttn.clicked.connect(self.set_temperature_up)
+        self.ui.temperature_down_bttn.clicked.connect(self.set_temperature_down)
+        self.ui.temperature_hot_bttn.clicked.connect(self.set_temperature_hot)
+        self.ui.temperature_cold_bttn.clicked.connect(self.set_temperature_cold)
+        self.ui.temperature_dry_bttn.clicked.connect(self.set_temperature_dry)
+        self.ui.temperature_turbo_bttn.clicked.connect(self.set_temperature_turbo)
+
+        self.ui.temperature_display.setText(self.temperature_text.format(*self.temperature_data))
+
+    # ==========================================================================================
+    # USERS
+    # ==========================================================================================
+
+        self.ui.add_user_bttn.clicked.connect(self.add_user)
+        self.ui.remove_user_bttn.clicked.connect(self.remove_user)
+
     # +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
     # LIGHTS FUNCTIONS
     # +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
@@ -217,7 +240,10 @@ class MainWindow(QMainWindow):
             #     self.ui.camera_display.height() - 10,
             #     Qt.AspectRatioMode.KeepAspectRatio)
             self.ui.camera_display.setPixmap(QPixmap.fromImage(image))
-    
+
+        if ROOMS_ALIASES[cam_num] == "Livingroom":
+            self.ui.user_camera_display.setPixmap(QPixmap.fromImage(image.copy(280, 0, 1000, 720)))
+
     @Slot()
     def cam_move_pressed_up(self):
         self.move_camera.emit(self.cam_in_use, "UP")
@@ -233,6 +259,54 @@ class MainWindow(QMainWindow):
     @Slot()
     def cam_move_pressed_left(self):
         self.move_camera.emit(self.cam_in_use, "LEFT")
+
+    # +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+    # TEMPERATURE FUNCTIONS
+    # +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+    @Slot()
+    def set_temperature_up(self):
+        if self.temperature_data[0] < 32: 
+            self.temperature_data[0] += 1
+        self.ui.temperature_display.setText(self.temperature_text.format(*self.temperature_data))
+
+    @Slot()
+    def set_temperature_down(self):
+        if self.temperature_data[0] > 16: 
+            self.temperature_data[0] -= 1
+        self.ui.temperature_display.setText(self.temperature_text.format(*self.temperature_data))
+
+    @Slot()
+    def set_temperature_hot(self):
+        self.temperature_data[1] = "Hot"
+        self.ui.temperature_display.setText(self.temperature_text.format(*self.temperature_data))
+
+    @Slot()
+    def set_temperature_cold(self):
+        self.temperature_data[1] = "Cold"
+        self.ui.temperature_display.setText(self.temperature_text.format(*self.temperature_data))
+
+    @Slot()
+    def set_temperature_dry(self):
+        self.temperature_data[1] = "Dry"
+        self.ui.temperature_display.setText(self.temperature_text.format(*self.temperature_data))
+
+    @Slot()
+    def set_temperature_turbo(self):
+        self.temperature_data[1] = "Turbo"
+        self.ui.temperature_display.setText(self.temperature_text.format(*self.temperature_data))
+
+
+    # +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+    # USERS FUNCTIONS
+    # +=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=
+
+    @Slot()
+    def add_user(self):
+        user = self.ui.username_entry.text()
+
+    def remove_user(self):
+        user = self.ui.username_entry.text()
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)

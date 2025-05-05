@@ -261,33 +261,33 @@ class Ui_MainWindow(object):
 
         self.gridLayout_14.addWidget(self.temperature_display, 1, 2, 1, 1)
 
-        self.temperature_down = QPushButton(self.temperature_tab)
-        self.temperature_down.setObjectName(u"temperature_down")
-        sizePolicy1.setHeightForWidth(self.temperature_down.sizePolicy().hasHeightForWidth())
-        self.temperature_down.setSizePolicy(sizePolicy1)
-        self.temperature_down.setFont(font1)
-        self.temperature_down.setStyleSheet(u"background: rgba(0,0,0,0);\n"
+        self.temperature_down_bttn = QPushButton(self.temperature_tab)
+        self.temperature_down_bttn.setObjectName(u"temperature_down_bttn")
+        sizePolicy1.setHeightForWidth(self.temperature_down_bttn.sizePolicy().hasHeightForWidth())
+        self.temperature_down_bttn.setSizePolicy(sizePolicy1)
+        self.temperature_down_bttn.setFont(font1)
+        self.temperature_down_bttn.setStyleSheet(u"background: rgba(0,0,0,0);\n"
 "border: 0px solid black;")
         icon = QIcon()
         icon.addFile(u"resources/icons/left-arrow.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.temperature_down.setIcon(icon)
-        self.temperature_down.setIconSize(QSize(100, 100))
+        self.temperature_down_bttn.setIcon(icon)
+        self.temperature_down_bttn.setIconSize(QSize(100, 100))
 
-        self.gridLayout_14.addWidget(self.temperature_down, 1, 1, 2, 1)
+        self.gridLayout_14.addWidget(self.temperature_down_bttn, 1, 1, 2, 1)
 
-        self.temperature_up = QPushButton(self.temperature_tab)
-        self.temperature_up.setObjectName(u"temperature_up")
-        sizePolicy1.setHeightForWidth(self.temperature_up.sizePolicy().hasHeightForWidth())
-        self.temperature_up.setSizePolicy(sizePolicy1)
-        self.temperature_up.setFont(font1)
-        self.temperature_up.setStyleSheet(u"background: rgba(0,0,0,0);\n"
+        self.temperature_up_bttn = QPushButton(self.temperature_tab)
+        self.temperature_up_bttn.setObjectName(u"temperature_up_bttn")
+        sizePolicy1.setHeightForWidth(self.temperature_up_bttn.sizePolicy().hasHeightForWidth())
+        self.temperature_up_bttn.setSizePolicy(sizePolicy1)
+        self.temperature_up_bttn.setFont(font1)
+        self.temperature_up_bttn.setStyleSheet(u"background: rgba(0,0,0,0);\n"
 "border: 0px solid black;")
         icon1 = QIcon()
         icon1.addFile(u"resources/icons/right-arrow.svg", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-        self.temperature_up.setIcon(icon1)
-        self.temperature_up.setIconSize(QSize(100, 100))
+        self.temperature_up_bttn.setIcon(icon1)
+        self.temperature_up_bttn.setIconSize(QSize(100, 100))
 
-        self.gridLayout_14.addWidget(self.temperature_up, 1, 3, 2, 1)
+        self.gridLayout_14.addWidget(self.temperature_up_bttn, 1, 3, 2, 1)
 
         self.verticalSpacer_5 = QSpacerItem(20, 40, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Minimum)
 
@@ -295,48 +295,48 @@ class Ui_MainWindow(object):
 
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
-        self.pushButton_4 = QPushButton(self.temperature_tab)
-        self.pushButton_4.setObjectName(u"pushButton_4")
-        sizePolicy1.setHeightForWidth(self.pushButton_4.sizePolicy().hasHeightForWidth())
-        self.pushButton_4.setSizePolicy(sizePolicy1)
+        self.temperature_hot_bttn = QPushButton(self.temperature_tab)
+        self.temperature_hot_bttn.setObjectName(u"temperature_hot_bttn")
+        sizePolicy1.setHeightForWidth(self.temperature_hot_bttn.sizePolicy().hasHeightForWidth())
+        self.temperature_hot_bttn.setSizePolicy(sizePolicy1)
         font4 = QFont()
         font4.setPointSize(25)
         font4.setBold(True)
-        self.pushButton_4.setFont(font4)
-        self.pushButton_4.setStyleSheet(u"background: rgba(0,0,0,0);\n"
+        self.temperature_hot_bttn.setFont(font4)
+        self.temperature_hot_bttn.setStyleSheet(u"background: rgba(0,0,0,0);\n"
 "border: 0px solid black;")
 
-        self.horizontalLayout.addWidget(self.pushButton_4)
+        self.horizontalLayout.addWidget(self.temperature_hot_bttn)
 
-        self.pushButton_6 = QPushButton(self.temperature_tab)
-        self.pushButton_6.setObjectName(u"pushButton_6")
-        sizePolicy1.setHeightForWidth(self.pushButton_6.sizePolicy().hasHeightForWidth())
-        self.pushButton_6.setSizePolicy(sizePolicy1)
-        self.pushButton_6.setFont(font4)
-        self.pushButton_6.setStyleSheet(u"background: rgba(0,0,0,0);\n"
+        self.temperature_cold_bttn = QPushButton(self.temperature_tab)
+        self.temperature_cold_bttn.setObjectName(u"temperature_cold_bttn")
+        sizePolicy1.setHeightForWidth(self.temperature_cold_bttn.sizePolicy().hasHeightForWidth())
+        self.temperature_cold_bttn.setSizePolicy(sizePolicy1)
+        self.temperature_cold_bttn.setFont(font4)
+        self.temperature_cold_bttn.setStyleSheet(u"background: rgba(0,0,0,0);\n"
 "border: 0px solid black;")
 
-        self.horizontalLayout.addWidget(self.pushButton_6)
+        self.horizontalLayout.addWidget(self.temperature_cold_bttn)
 
-        self.pushButton_5 = QPushButton(self.temperature_tab)
-        self.pushButton_5.setObjectName(u"pushButton_5")
-        sizePolicy1.setHeightForWidth(self.pushButton_5.sizePolicy().hasHeightForWidth())
-        self.pushButton_5.setSizePolicy(sizePolicy1)
-        self.pushButton_5.setFont(font4)
-        self.pushButton_5.setStyleSheet(u"background: rgba(0,0,0,0);\n"
+        self.temperature_dry_bttn = QPushButton(self.temperature_tab)
+        self.temperature_dry_bttn.setObjectName(u"temperature_dry_bttn")
+        sizePolicy1.setHeightForWidth(self.temperature_dry_bttn.sizePolicy().hasHeightForWidth())
+        self.temperature_dry_bttn.setSizePolicy(sizePolicy1)
+        self.temperature_dry_bttn.setFont(font4)
+        self.temperature_dry_bttn.setStyleSheet(u"background: rgba(0,0,0,0);\n"
 "border: 0px solid black;")
 
-        self.horizontalLayout.addWidget(self.pushButton_5)
+        self.horizontalLayout.addWidget(self.temperature_dry_bttn)
 
-        self.pushButton_3 = QPushButton(self.temperature_tab)
-        self.pushButton_3.setObjectName(u"pushButton_3")
-        sizePolicy1.setHeightForWidth(self.pushButton_3.sizePolicy().hasHeightForWidth())
-        self.pushButton_3.setSizePolicy(sizePolicy1)
-        self.pushButton_3.setFont(font4)
-        self.pushButton_3.setStyleSheet(u"background: rgba(0,0,0,0);\n"
+        self.temperature_turbo_bttn = QPushButton(self.temperature_tab)
+        self.temperature_turbo_bttn.setObjectName(u"temperature_turbo_bttn")
+        sizePolicy1.setHeightForWidth(self.temperature_turbo_bttn.sizePolicy().hasHeightForWidth())
+        self.temperature_turbo_bttn.setSizePolicy(sizePolicy1)
+        self.temperature_turbo_bttn.setFont(font4)
+        self.temperature_turbo_bttn.setStyleSheet(u"background: rgba(0,0,0,0);\n"
 "border: 0px solid black;")
 
-        self.horizontalLayout.addWidget(self.pushButton_3)
+        self.horizontalLayout.addWidget(self.temperature_turbo_bttn)
 
 
         self.gridLayout_14.addLayout(self.horizontalLayout, 2, 2, 1, 1)
@@ -395,10 +395,6 @@ class Ui_MainWindow(object):
         self.gridLayout_6 = QGridLayout(self.camera_tab)
         self.gridLayout_6.setSpacing(20)
         self.gridLayout_6.setObjectName(u"gridLayout_6")
-        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
-
-        self.gridLayout_6.addItem(self.horizontalSpacer_4, 0, 2, 1, 1)
-
         self.camera_location_selector = QComboBox(self.camera_tab)
         self.camera_location_selector.setObjectName(u"camera_location_selector")
         sizePolicy2 = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Maximum)
@@ -528,6 +524,10 @@ class Ui_MainWindow(object):
 
         self.gridLayout_6.addWidget(self.label_12, 0, 0, 1, 1)
 
+        self.horizontalSpacer_4 = QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
+
+        self.gridLayout_6.addItem(self.horizontalSpacer_4, 0, 2, 1, 1)
+
         self.tabWidget.addTab(self.camera_tab, "")
         self.devices_tab = QWidget()
         self.devices_tab.setObjectName(u"devices_tab")
@@ -538,21 +538,61 @@ class Ui_MainWindow(object):
         self.security_tab.setStyleSheet(u"background: qlineargradient(spread:pad, x1:1, y1:1, x2:1, y2:0, stop:0 rgba(0, 0, 0, 255), stop:1 rgba(34, 34, 34, 255))")
         self.gridLayout_8 = QGridLayout(self.security_tab)
         self.gridLayout_8.setObjectName(u"gridLayout_8")
-        self.horizontalSpacer_5 = QSpacerItem(576, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.verticalLayout_5 = QVBoxLayout()
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.user_camera_display = QLabel(self.security_tab)
+        self.user_camera_display.setObjectName(u"user_camera_display")
 
-        self.gridLayout_8.addItem(self.horizontalSpacer_5, 0, 0, 1, 1)
+        self.verticalLayout_5.addWidget(self.user_camera_display)
 
-        self.horizontalSpacer_6 = QSpacerItem(576, 20, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding)
+        self.username_entry = QLineEdit(self.security_tab)
+        self.username_entry.setObjectName(u"username_entry")
+        font7 = QFont()
+        font7.setFamilies([u"Ubuntu Sans"])
+        font7.setPointSize(50)
+        self.username_entry.setFont(font7)
+        self.username_entry.setStyleSheet(u"\n"
+"border: 0px solid black;\n"
+"\n"
+"padding:10px;\n"
+"margin:5px;")
 
-        self.gridLayout_8.addItem(self.horizontalSpacer_6, 0, 1, 1, 1)
+        self.verticalLayout_5.addWidget(self.username_entry)
+
+        self.add_user_bttn = QPushButton(self.security_tab)
+        self.add_user_bttn.setObjectName(u"add_user_bttn")
+        font8 = QFont()
+        font8.setPointSize(50)
+        self.add_user_bttn.setFont(font8)
+        self.add_user_bttn.setStyleSheet(u"background-color: rgb(94, 92, 100);\n"
+"border: 0px solid black;\n"
+"\n"
+"padding:10px;\n"
+"margin:5px;")
+
+        self.verticalLayout_5.addWidget(self.add_user_bttn)
+
+        self.remove_user_bttn = QPushButton(self.security_tab)
+        self.remove_user_bttn.setObjectName(u"remove_user_bttn")
+        self.remove_user_bttn.setFont(font8)
+        self.remove_user_bttn.setStyleSheet(u"background-color: rgb(94, 92, 100);\n"
+"border: 0px solid black;\n"
+"\n"
+"padding:10px;\n"
+"margin:5px;")
+
+        self.verticalLayout_5.addWidget(self.remove_user_bttn)
+
+
+        self.gridLayout_8.addLayout(self.verticalLayout_5, 0, 0, 1, 1)
 
         self.verticalLayout_2 = QVBoxLayout()
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.label_14 = QLabel(self.security_tab)
         self.label_14.setObjectName(u"label_14")
-        font7 = QFont()
-        font7.setPointSize(20)
-        self.label_14.setFont(font7)
+        font9 = QFont()
+        font9.setPointSize(20)
+        self.label_14.setFont(font9)
 
         self.verticalLayout_2.addWidget(self.label_14)
 
@@ -561,7 +601,7 @@ class Ui_MainWindow(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 935, 422))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 935, 894))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.label_15 = QLabel(self.scrollAreaWidgetContents)
@@ -574,55 +614,7 @@ class Ui_MainWindow(object):
         self.verticalLayout_2.addWidget(self.scrollArea)
 
 
-        self.gridLayout_8.addLayout(self.verticalLayout_2, 1, 1, 1, 1)
-
-        self.verticalLayout_5 = QVBoxLayout()
-        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.user_camera_preview = QLabel(self.security_tab)
-        self.user_camera_preview.setObjectName(u"user_camera_preview")
-
-        self.verticalLayout_5.addWidget(self.user_camera_preview)
-
-        self.username_entry = QLineEdit(self.security_tab)
-        self.username_entry.setObjectName(u"username_entry")
-        font8 = QFont()
-        font8.setFamilies([u"Ubuntu Sans"])
-        font8.setPointSize(50)
-        self.username_entry.setFont(font8)
-        self.username_entry.setStyleSheet(u"\n"
-"border: 0px solid black;\n"
-"\n"
-"padding:10px;\n"
-"margin:5px;")
-
-        self.verticalLayout_5.addWidget(self.username_entry)
-
-        self.add_user_bttn = QPushButton(self.security_tab)
-        self.add_user_bttn.setObjectName(u"add_user_bttn")
-        font9 = QFont()
-        font9.setPointSize(50)
-        self.add_user_bttn.setFont(font9)
-        self.add_user_bttn.setStyleSheet(u"background-color: rgb(94, 92, 100);\n"
-"border: 0px solid black;\n"
-"\n"
-"padding:10px;\n"
-"margin:5px;")
-
-        self.verticalLayout_5.addWidget(self.add_user_bttn)
-
-        self.remove_user_bttn = QPushButton(self.security_tab)
-        self.remove_user_bttn.setObjectName(u"remove_user_bttn")
-        self.remove_user_bttn.setFont(font9)
-        self.remove_user_bttn.setStyleSheet(u"background-color: rgb(94, 92, 100);\n"
-"border: 0px solid black;\n"
-"\n"
-"padding:10px;\n"
-"margin:5px;")
-
-        self.verticalLayout_5.addWidget(self.remove_user_bttn)
-
-
-        self.gridLayout_8.addLayout(self.verticalLayout_5, 1, 0, 1, 1)
+        self.gridLayout_8.addLayout(self.verticalLayout_2, 0, 1, 1, 1)
 
         self.tabWidget.addTab(self.security_tab, "")
 
@@ -632,7 +624,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(5)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -652,12 +644,12 @@ class Ui_MainWindow(object):
         self.temperature_display.setStyleSheet(QCoreApplication.translate("MainWindow", u"background: rgba(0,0,0,0);\n"
 "border: 0px solid black;", None))
         self.temperature_display.setText(QCoreApplication.translate("MainWindow", u"22\u00b0C", None))
-        self.temperature_down.setText("")
-        self.temperature_up.setText("")
-        self.pushButton_4.setText(QCoreApplication.translate("MainWindow", u"Hot", None))
-        self.pushButton_6.setText(QCoreApplication.translate("MainWindow", u"Cold", None))
-        self.pushButton_5.setText(QCoreApplication.translate("MainWindow", u"Dry", None))
-        self.pushButton_3.setText(QCoreApplication.translate("MainWindow", u"Turbo", None))
+        self.temperature_down_bttn.setText("")
+        self.temperature_up_bttn.setText("")
+        self.temperature_hot_bttn.setText(QCoreApplication.translate("MainWindow", u"Hot", None))
+        self.temperature_cold_bttn.setText(QCoreApplication.translate("MainWindow", u"Cold", None))
+        self.temperature_dry_bttn.setText(QCoreApplication.translate("MainWindow", u"Dry", None))
+        self.temperature_turbo_bttn.setText(QCoreApplication.translate("MainWindow", u"Turbo", None))
         self.label_5.setText(QCoreApplication.translate("MainWindow", u"Location", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.temperature_tab), QCoreApplication.translate("MainWindow", u"Temperature", None))
         self.camera_bttn_up.setText("")
@@ -668,11 +660,11 @@ class Ui_MainWindow(object):
         self.label_12.setText(QCoreApplication.translate("MainWindow", u"Location", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.camera_tab), QCoreApplication.translate("MainWindow", u"Camera", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.devices_tab), QCoreApplication.translate("MainWindow", u"Devices", None))
-        self.label_14.setText(QCoreApplication.translate("MainWindow", u"Logs", None))
-        self.label_15.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
-        self.user_camera_preview.setText("")
+        self.user_camera_display.setText("")
         self.add_user_bttn.setText(QCoreApplication.translate("MainWindow", u"ADD User", None))
         self.remove_user_bttn.setText(QCoreApplication.translate("MainWindow", u"REMOVE User", None))
+        self.label_14.setText(QCoreApplication.translate("MainWindow", u"Logs", None))
+        self.label_15.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.security_tab), QCoreApplication.translate("MainWindow", u"Security", None))
     # retranslateUi
 

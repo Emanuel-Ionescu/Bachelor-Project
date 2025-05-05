@@ -85,6 +85,36 @@ def main():
         ECHO(message)
         ECHO("Frame readed")
 
+        if(option == "add"):
+            username = width # working on older code where the second argument was width
+            faces = AI.find_faces(frame)
+            face = faces[0][0]
+            face *= 300
+            G = [(face[0]+face[2]) * .5, (face[1]+face[3]) * .5]
+            to_be_sent["G"].append(str(G[0]/300) + ", " + str(G[1]/300))
+            dist = min(face[2] - face[0], face[3] - face[1]) * .5
+
+            face[0] = G[0] - dist
+            face[1] = G[1] - dist
+            face[2] = G[0] + dist
+            face[3] = G[1] + dist
+
+            face = np.array(face, np.int32)
+
+            cropped_frame = frame[face[0] : face[2], face[1] : face[3]]
+            mask = AI.id_face(cropped_frame)
+            with open('./resources/data/users.json', 'r') as file:
+                users_data = json.load(file)
+            
+            if username in users_data.keys() is False:
+                users_data[username] = []
+            
+            users_data[username].append(str(mask))
+
+            with open('./resources/data/users.json', 'w') as file:
+                json.dump(users_data, file)
+            continue
+
         if(option == "all" or option == "face"):
             faces = AI.find_faces(frame)
             if faces is not None:
