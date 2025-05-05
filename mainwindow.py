@@ -241,8 +241,8 @@ class MainWindow(QMainWindow):
             #     Qt.AspectRatioMode.KeepAspectRatio)
             self.ui.camera_display.setPixmap(QPixmap.fromImage(image))
 
-        if ROOMS_ALIASES[cam_num] == "Livingroom":
-            self.ui.user_camera_display.setPixmap(QPixmap.fromImage(image.copy(390, 110, 890, 610)))
+        # if ROOMS_ALIASES[cam_num] == "Livingroom":
+        #     self.ui.user_camera_display.setPixmap(QPixmap.fromImage(image.copy(390, 110, 890, 610)))
 
     @Slot()
     def cam_move_pressed_up(self):
