@@ -220,6 +220,7 @@ class MoveCamera(QThread):
 class GetWebCommands(QThread):
     send_camera_move = Signal(int, str)
     def __init__(self):
+        super().__init__()
         self.RES = DataTransmition.UDPReceiver(WEBCOMMANDS["IP"], WEBCOMMANDS["PORT"])
 
     def run(self):

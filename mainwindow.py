@@ -138,6 +138,7 @@ class MainWindow(QMainWindow):
 
         # connection with web
         self.web_commands_thread.send_camera_move.connect(self.camera_controll_thread.move)
+        self.web_commands_thread.start()
 
     # ==========================================================================================
     # TEMPERATURE
