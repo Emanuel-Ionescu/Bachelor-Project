@@ -24,9 +24,7 @@ US = UDPSender(
 
 def main():
 
-    os.chdir("/home/debian/SmartHome/web-server/")
-
-    app = fsk.Flask("SmartHome", root_path="/home/debian/SmartHome/web-server/")
+    app = fsk.Flask("SmartHome")
     app.secret_key = "nxp12345"
 
     @app.route('/')
