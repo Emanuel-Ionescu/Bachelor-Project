@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <title>SmartHome</title>
+        <link rel="stylesheet" href="../static/room_navigation.css">
+        <link rel="stylesheet" href="../static/lights_menu.css">
+        <link rel="stylesheet" href="../static/temperature.css">
+        <link rel="stylesheet" href="../static/camera.css">
+        <script src="../static/functions.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    </head>
+    <body>
+
+        <span class="room_menu_open" onclick="OpenRoomMenu()">&#9776; Choose a room</span>
+        <p style="color:#fff;font-size: 25px;">You are in Livingroom</p>
+        <div id="room_nav" class="room_menu_overlay">
+            <a href="javascript:void(0)" class="room_menu_close" onclick="CloseRoomMenu()">&times;</a>
+            <div class="room_menu_overlay_content">
+                <a href="/livingroom">Livingroom</a>
+                <a href="/bedroom1">Bedroom1</a>
+            </div>
+        </div>
+
+        <div class="camera_div">
+            <br><br>
+            <h1>Camera</h1><br>
+            <div class="image_div">
+                <img src="{{ url_for('video_feed_livingroom') }}" style="width:100%">
+            </div>
+            <br><br>
+            <button class="camera_bttn" onclick="Camera_Move('Livingroom', 'LEFT')">left</button>
+            <button class="camera_bttn" onclick="Camera_Move('Livingroom', 'DOWN')">down</button>
+            <button class="camera_bttn" onclick="Camera_Move('Livingroom', 'UP')">up</button>
+            <button class="camera_bttn" onclick="Camera_Move('Livingroom', 'RIGHT')">right</button>
+
+            <br><br>
+        </div>
+    </body>
+</html>
