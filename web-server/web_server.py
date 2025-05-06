@@ -1,5 +1,5 @@
 import json
-with open('./resources/data/config.json', 'r') as file:
+with open('../resources/data/config.json', 'r') as file:
     hardware_data = json.load(file)
 
 CAMERAS = list(hardware_data["Camera"].values())
