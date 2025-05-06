@@ -4,6 +4,9 @@ with open('../resources/data/config.json', 'r') as file:
 
 CAMERAS = list(hardware_data["Camera"].values())
 
+import sys
+sys.path.append("..")
+
 import flask as fsk
 import os
 import cv2
