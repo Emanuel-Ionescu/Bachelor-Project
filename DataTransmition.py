@@ -60,7 +60,7 @@ class ImageReceiver:
         buffer, _ = self.sock.recvfrom(65000)
 
         if buffer.decode().split("/")[0] == "start":
-            _, ID, rows, cols, s_height, s_width = list(map(int, buffer.decode().split('/'))) 
+            ID, rows, cols, s_height, s_width = list(map(int, buffer.decode().split('/')[1:])) 
             aux_data, _ = self.sock.recvfrom(65000)
 
             frame = np.zeros((rows * s_height, cols * s_width, 3), dtype=np.uint8)
