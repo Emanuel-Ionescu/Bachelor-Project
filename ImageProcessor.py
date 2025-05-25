@@ -19,7 +19,7 @@ FEEDBACKS = [
 
 CAMERA_RESOLUTION = (1280, 720)
 FRAME_SLICE_INFO = [
-    [int(CAMERA_RESOLUTION[0]/4), int(3 * CAMERA_RESOLUTION[0]/4), int(CAMERA_RESOLUTION[1]/4), int(3 * CAMERA_RESOLUTION[1]/4), "w:0.25:0.5,h:0.25:0.5"],
+    [int(CAMERA_RESOLUTION[0]/4), int(3 * CAMERA_RESOLUTION[0]/4), int(CAMERA_RESOLUTION[1]/4), int(3 * CAMERA_RESOLUTION[1]/4), "w:0.25:0.5,h:0.25:0.5"], 
     [0                          , int(CAMERA_RESOLUTION[0]/2)    , 0                          , int(CAMERA_RESOLUTION[1]/2)    , "w:0.00:0.5,h:0.00:0.5"],
     [0                          , int(CAMERA_RESOLUTION[0]/2)    , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "w:0.50:0.5,h:0.00:0.5"],
     [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , 0                          , int(CAMERA_RESOLUTION[1]/2)    , "w:0.00:0.5,h:0.50:0.5"],
@@ -134,7 +134,7 @@ def main():
                     x1, x2, y1, y2, args = slice_info
                     _, xa, _ = args.split(',')[0].split(':')
                     _, ya, _ = args.split(',')[1].split(':')
-                    aux = frame[x1 : x2, y1 : y2]
+                    aux = frame[y1 : y2, x1 : x2]
                     print(aux.shape)
                     slice_faces = AI.find_faces(aux)
                     if slice_faces is not None:
