@@ -17,6 +17,15 @@ FEEDBACKS = [
     hardware_data["Platform"]["GUIFeedback2"]
 ]
 
+CAMERA_RESOLUTION = (1280, 720)
+FRAME_SLICE_INFO = [
+    [int(CAMERA_RESOLUTION[0]/4), int(3 * CAMERA_RESOLUTION[0]/4), int(CAMERA_RESOLUTION[1]/4), int(3 * CAMERA_RESOLUTION[1]/4), "w:0.25:0.5,h:0.25:0.5"],
+    [0                          , int(CAMERA_RESOLUTION[0]/2)    , 0                          , int(CAMERA_RESOLUTION[1]/2)    , "w:0.00:0.5,h:0.00:0.5"],
+    [0                          , int(CAMERA_RESOLUTION[0]/2)    , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "w:0.50:0.5,h:0.00:0.5"],
+    [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , 0                          , int(CAMERA_RESOLUTION[1]/2)    , "w:0.00:0.5,h:0.50:0.5"],
+    [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "w:0.50:0.5,h:0.50:0.5"]
+]
+
 from HumanDetection import Model
 from DataTransmition import ImageReceiver, UDPSender
 import numpy as np
@@ -117,7 +126,24 @@ def main():
 
         if(option == "all" or option == "face"):
             faces = AI.find_faces(frame)
-            if faces is not None:
+
+            # recursive splitting the frame
+            if faces is None:
+                faces = []
+                for slice in FRAME_SLICE_INFO:
+                    x1, x2, y1, y2, args = slice
+                    _, xa, _, _, ya, _ = args
+                    slice_faces = AI.find_faces(frame[x1:x2, y1:y2])
+                    if slice_faces is not None:
+                        for f in slice_faces:
+                            f_aux = f
+                            f_aux[0][0] += xa
+                            f_aux[0][1] += ya
+                            f_aux[0][2] += xa
+                            f_aux[0][3] += ya
+                            faces.append(f_aux)
+
+            if faces is not [] or faces != []:
                 print(len(faces))
                 to_be_sent["faces"]  = []
                 to_be_sent["scores"] = []

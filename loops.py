@@ -160,9 +160,6 @@ class UpdateCamera(QThread):
                                     (255, 0, 0, 255), 6)
                         except:
                             print("No face found!", "CAM", i)
-                            for slice in FRAME_SLICE_INFO:
-                                x1, x2, y1, y2, msg = slice
-                                self.IS[i].send(self.frame[i][x1:x2, y1:y2], msg)
                             
                         self.AI_data[i] = None
 
