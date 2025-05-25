@@ -5,7 +5,6 @@ import datetime
 import cv2
 import numpy as np
 import socket
-import time
 
 class ImageSender:
 
@@ -24,24 +23,11 @@ class ImageSender:
         elif len(aux_data) < 32:
             aux_data = aux_data.ljust(32)
 
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        height, width, _ = frame.shape
-        rows, cols = height//300 + 1, width//300 + 1 
-        s_height = int(height/rows)
-        s_width = int(width/rows)
+        s_frame = cv2.resize(frame, self.resolution, cv2.INTER_LINEAR) # to be changd if nedded
+        s_frame = cv2.cvtColor(s_frame, cv2.COLOR_BGR2RGB)
 
-
-        ID = str(int(time.time() * 1000))
-        slice_index = 0
-        self.sock.sendto(f"start/{ID}/{rows}/{cols}/{s_height}/{s_width}".encode(), (self.dest_ip, self.dest_port))
-        self.sock.sendto(aux_data.encode(), (self.dest_ip, self.dest_port))
-        for i in range(1, rows):
-            for e in range(1, cols):
-                slice_index += 1
-                s_frame = frame[ (i-1) * s_height : i * s_height, (e-1) * s_width : e * s_width]
-                _, buffer = cv2.imencode('.jpg',s_frame,(cv2.IMWRITE_JPEG_QUALITY,90))
-                self.sock.sendto(f"{slice_index:02d}".encode() + bytes(buffer), (self.dest_ip, self.dest_port)) 
-        self.sock.sendto(f"end/{ID}".encode(), (self.dest_ip, self.dest_port))
+        _, buffer = cv2.imencode('.jpg',s_frame,(cv2.IMWRITE_JPEG_QUALITY,80))
+        self.sock.sendto(aux_data.encode() + bytes(buffer), (self.dest_ip, self.dest_port))
 
 
 class ImageReceiver:
@@ -50,36 +36,17 @@ class ImageReceiver:
         self.host_ip = MY_IP_ADDR
         self.host_port = MY_PORT
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        buffer_size = 64 * 1024 * 48 # create image queue of 48 packets
+        buffer_size = 64 * 1024 
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, buffer_size)
         self.sock.bind((self.host_ip, self.host_port))
-        self.frame = None
         print("Image reciever created:", self.host_ip, self.host_port)
 
     def receive(self):
         buffer, _ = self.sock.recvfrom(65000)
-
-        if buffer.decode().split("/")[0] == "start":
-            ID, rows, cols, s_height, s_width = list(map(int, buffer.decode().split('/')[1:])) 
-            aux_data, _ = self.sock.recvfrom(65000)
-
-            frame = np.zeros((rows * s_height, cols * s_width, 3), dtype=np.uint8)
-
-            for i in range(rows * cols):
-                buffer, _ = self.sock.recvfrom(65000)
-                
-                # if recieved end/start unexpected
-                if buffer.decode().split('/') == "end" or buffer.decode().split('/') == "start":
-                    return aux_data.decode(), frame
-
-                index, img_buffer = int(buffer[:2].decode()), buffer[2:]
-                nparr = np.frombuffer(img_buffer,np.uint8)
-                img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-                i = index // rows + 1
-                e = index % cols  + 1
-                frame[ (i-1) * s_height : i * s_height, (e-1) * s_width : e * s_width] = img
-
-        return aux_data.decode(), frame
+        aux_data = buffer[:32]
+        nparr = np.frombuffer(buffer[32:],np.uint8)
+        img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        return aux_data.decode(), img
 
 
 class UDPSender:
