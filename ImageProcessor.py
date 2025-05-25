@@ -132,15 +132,15 @@ def main():
                 faces = []
                 for slice in FRAME_SLICE_INFO:
                     x1, x2, y1, y2, args = slice
-                    _, xa, _, _, ya, _ = args
+                    _, xa, _, _, ya, _ = args.split(':')
                     slice_faces = AI.find_faces(frame[x1:x2, y1:y2])
                     if slice_faces is not None:
                         for f in slice_faces:
                             f_aux = f
-                            f_aux[0][0] += xa
-                            f_aux[0][1] += ya
-                            f_aux[0][2] += xa
-                            f_aux[0][3] += ya
+                            f_aux[0][0] += float(xa)
+                            f_aux[0][1] += float(ya)
+                            f_aux[0][2] += float(xa)
+                            f_aux[0][3] += float(ya)
                             faces.append(f_aux)
 
             if faces is not [] or faces != []:
