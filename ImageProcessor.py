@@ -82,8 +82,8 @@ def main():
         message = message.split()[0]
         option, width, height = message.split(',')
 
-        ECHO(message)
-        ECHO("Frame readed")
+        print("\nInstruction:", message)
+        print("Face: ", end="")
 
         if(option == "add"):
             username = width # working on older code where the second argument was width
@@ -118,7 +118,7 @@ def main():
         if(option == "all" or option == "face"):
             faces = AI.find_faces(frame)
             if faces is not None:
-                ECHO("Face found")
+                print(len(faces))
                 to_be_sent["faces"]  = []
                 to_be_sent["scores"] = []
                 to_be_sent["G"]      = []
@@ -146,18 +146,23 @@ def main():
                     #mask = AI.id_face(cropped_frame)
                     ECHO("ID ready")
                     #to_be_sent["masks"].append(str(mask)[1:-1])
-            ECHO("Frame processed for faces")
+            else:
+                print("None")
+
+        print("Body: ", end="")
 
         if(option == "all" or option == "body"):
             body = AI.find_body(frame)
             if body is not None:
+                print("Found")
                 to_be_sent["body"] = {
                         "x"     : np.array(body[0], dtype=np.int32).tolist(),
                         "y"     : np.array(body[1], dtype=np.int32).tolist(),
                         # "score" : np.array(body[2], dtype=np.int32).tolist()
                     }
-            ECHO("Frame processed for body")
-
+            else:
+                print("None")
+                
         to_be_sent["ID"] = ID
         to_be_sent["offset"] = width + "," + height
         to_be_sent["sent-time"] = "t" + str(time.time())
