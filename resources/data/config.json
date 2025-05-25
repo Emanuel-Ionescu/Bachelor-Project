@@ -45,22 +45,25 @@
             "Bulb1" : {
                 "IP" : "192.168.1.51",
                 "Location" : "Bedroom1"
-                }
-            
-            }
-        ,
+                },
+            "Bulb2" : {
+                "IP" : "192.168.1.52",
+                "Location" : "Livingroom"
+                }            
+        },
 
-        "Outlet" : {}
+        "Outlet" : {
+            "Lamp" : {
+                "IP" : "192.168.1.81",
+                "Location" : "Bedroom1"
+            }
+        }
     },
 
     "Camera" : {
         "TapoCam1" : {
             "ID" : 0,
             "IP" : "192.168.1.21",
-            "Auth" : {
-                "User" : "TapoCam",
-                "Password" : "salut123"
-            },
             "Command" : ["up", "down", "left", "right", "open", "close"],
             "Location" : "Livingroom"
         },
@@ -68,10 +71,6 @@
         "TapoCam2" : {
             "ID" : 1,
             "IP" : "192.168.1.22",
-            "Auth" : {
-                "User" : "TapoCam",
-                "Password" : "salut123"
-            },
             "Command" : ["up", "down", "left", "right", "open", "close"],
             "Location" : "Bedroom1"
         }

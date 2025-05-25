@@ -14,6 +14,11 @@ FEEDBACKS = [
     hardware_data["Platform"]["GUIFeedback2"]
 ]
 
+TAPO_CAM_AUTH = {
+    "User" : "TapoCam",
+    "Pass" : "salut123"
+}
+
 WEBCOMMANDS = hardware_data["Platform"]["GUIWebCommands"]
 
 from PySide6.QtCore import QTimer, Signal, Slot, Qt, QThread
@@ -60,13 +65,13 @@ if ON_COMPUTER:
     class NonGstCam():
         def __init__(self):
             self.cam1= cv2.VideoCapture("rtsp://{cam1_u}:{cam1_p}@{cam1_ip}/stream2".format(
-                cam1_u  = CAMERAS[0]["Auth"]["User"],
-                cam1_p  = CAMERAS[0]["Auth"]["Password"],
+                cam1_u  = TAPO_CAM_AUTH["User"],
+                cam1_p  = TAPO_CAM_AUTH["Password"],
                 cam1_ip = CAMERAS[0]["IP"]
             ))
             self.cam2 = cv2.VideoCapture("rtsp://{cam2_u}:{cam2_p}@{cam2_ip}/stream2".format(
-                cam2_u  = CAMERAS[1]["Auth"]["User"],
-                cam2_p  = CAMERAS[1]["Auth"]["Password"],
+                cam2_u  = TAPO_CAM_AUTH["User"],
+                cam2_p  = TAPO_CAM_AUTH["Password"],
                 cam2_ip = CAMERAS[1]["IP"] 
             ))
 
@@ -94,11 +99,11 @@ class UpdateCamera(QThread):
             pipeline = 'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ' \
                 '! queue ! appsink sync=false rtspsrc location="rtsp://{cam1_u}:{cam1_p}@{cam1_ip}/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ' \
                 '! queue ! comp. rtspsrc location="rtsp://{cam2_u}:{cam2_p}@{cam2_ip}/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp.'.format(
-                cam1_u  = CAMERAS[0]["Auth"]["User"],
-                cam1_p  = CAMERAS[0]["Auth"]["Password"],
+                cam1_u  = TAPO_CAM_AUTH["User"],
+                cam1_p  = TAPO_CAM_AUTH["Password"],
                 cam1_ip = CAMERAS[0]["IP"],
-                cam2_u  = CAMERAS[1]["Auth"]["User"],
-                cam2_p  = CAMERAS[1]["Auth"]["Password"],
+                cam2_u  = TAPO_CAM_AUTH["User"],
+                cam2_p  = TAPO_CAM_AUTH["Password"],
                 cam2_ip = CAMERAS[1]["IP"] 
             )
         
@@ -189,7 +194,7 @@ class MoveCamera(QThread):
             try:
                 for cam in CAMERAS:
                     self.controller.append(
-                        pytapo.Tapo(cam["IP"], cam["Auth"]["User"], cam["Auth"]["Password"])
+                        pytapo.Tapo(cam["IP"], TAPO_CAM_AUTH["User"], TAPO_CAM_AUTH["Password"])
                     )
                 print("Cams controlls seted up")
                 not_ok = False
