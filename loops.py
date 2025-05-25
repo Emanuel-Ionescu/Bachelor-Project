@@ -16,7 +16,7 @@ FEEDBACKS = [
 
 TAPO_CAM_AUTH = {
     "User" : "TapoCam",
-    "Pass" : "salut123"
+    "Password" : "salut123"
 }
 
 WEBCOMMANDS = hardware_data["Platform"]["GUIWebCommands"]
