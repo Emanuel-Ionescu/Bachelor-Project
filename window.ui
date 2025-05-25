@@ -65,13 +65,13 @@ QTabBar::tab:!selected {
 }</string>
       </property>
       <property name="tabPosition">
-       <enum>QTabWidget::North</enum>
+       <enum>QTabWidget::TabPosition::North</enum>
       </property>
       <property name="currentIndex">
-       <number>5</number>
+       <number>0</number>
       </property>
       <property name="elideMode">
-       <enum>Qt::ElideLeft</enum>
+       <enum>Qt::TextElideMode::ElideLeft</enum>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -96,10 +96,10 @@ QTabBar::tab:!selected {
         <item row="0" column="1">
          <spacer name="horizontalSpacer_9">
           <property name="orientation">
-           <enum>Qt::Vertical</enum>
+           <enum>Qt::Orientation::Vertical</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Minimum</enum>
+           <enum>QSizePolicy::Policy::Minimum</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -112,7 +112,7 @@ QTabBar::tab:!selected {
         <item row="1" column="0">
          <spacer name="horizontalSpacer_2">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Orientation::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -125,10 +125,10 @@ QTabBar::tab:!selected {
         <item row="2" column="1">
          <spacer name="verticalSpacer_3">
           <property name="orientation">
-           <enum>Qt::Vertical</enum>
+           <enum>Qt::Orientation::Vertical</enum>
           </property>
           <property name="sizeType">
-           <enum>QSizePolicy::Minimum</enum>
+           <enum>QSizePolicy::Policy::Minimum</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -148,7 +148,7 @@ QTabBar::tab:!selected {
         <item row="1" column="2">
          <spacer name="horizontalSpacer_7">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Orientation::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -229,19 +229,6 @@ QComboBox::drop-down{
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
         <item row="1" column="4">
          <widget class="QComboBox" name="light_source_selector">
           <property name="font">
@@ -275,22 +262,6 @@ QComboBox::drop-down{
         </item>
         <item row="2" column="2">
          <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
           <item>
            <widget class="QPushButton" name="lights_on_bttn">
             <property name="sizePolicy">
@@ -367,10 +338,10 @@ Color</string>
           <item>
            <spacer name="verticalSpacer_2">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Orientation::Vertical</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Fixed</enum>
+             <enum>QSizePolicy::Policy::Fixed</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -381,6 +352,22 @@ Color</string>
            </spacer>
           </item>
          </layout>
+        </item>
+        <item row="1" column="2">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Policy::Expanding</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
         </item>
        </layout>
       </widget>
@@ -397,10 +384,10 @@ Color</string>
           <item row="4" column="2">
            <spacer name="verticalSpacer_6">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Orientation::Vertical</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
+             <enum>QSizePolicy::Policy::Minimum</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -413,10 +400,10 @@ Color</string>
           <item row="1" column="0">
            <spacer name="horizontalSpacer_8">
             <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
+             <enum>QSizePolicy::Policy::Minimum</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -441,14 +428,14 @@ Color</string>
              </font>
             </property>
             <property name="styleSheet">
-             <string>background: rgba(0,0,0,0);
+             <string notr="true">background: rgba(192, 97, 203, 0.0);
 border: 0px solid black;</string>
             </property>
             <property name="text">
              <string>22°C</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -478,8 +465,8 @@ border: 0px solid black;</string>
             </property>
             <property name="iconSize">
              <size>
-              <width>100</width>
-              <height>100</height>
+              <width>200</width>
+              <height>200</height>
              </size>
             </property>
            </widget>
@@ -510,8 +497,8 @@ border: 0px solid black;</string>
             </property>
             <property name="iconSize">
              <size>
-              <width>100</width>
-              <height>100</height>
+              <width>200</width>
+              <height>200</height>
              </size>
             </property>
            </widget>
@@ -519,10 +506,10 @@ border: 0px solid black;</string>
           <item row="0" column="2">
            <spacer name="verticalSpacer_5">
             <property name="orientation">
-             <enum>Qt::Vertical</enum>
+             <enum>Qt::Orientation::Vertical</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
+             <enum>QSizePolicy::Policy::Minimum</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -534,6 +521,9 @@ border: 0px solid black;</string>
           </item>
           <item row="2" column="2">
            <layout class="QHBoxLayout" name="horizontalLayout">
+            <property name="spacing">
+             <number>0</number>
+            </property>
             <item>
              <widget class="QPushButton" name="temperature_hot_bttn">
               <property name="sizePolicy">
@@ -549,8 +539,10 @@ border: 0px solid black;</string>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">background: rgba(0,0,0,0);
-border: 0px solid black;</string>
+               <string notr="true">background: rgba(192, 97, 203, 0.2);
+border: 0px solid black;
+margin-left: 0px;
+margin-right: 0px;</string>
               </property>
               <property name="text">
                <string>Hot</string>
@@ -572,8 +564,10 @@ border: 0px solid black;</string>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">background: rgba(0,0,0,0);
-border: 0px solid black;</string>
+               <string notr="true">background: rgba(192, 97, 203, 0.2);
+border: 0px solid black;
+margin-left: 0px;
+margin-right: 0px;</string>
               </property>
               <property name="text">
                <string>Cold</string>
@@ -595,8 +589,10 @@ border: 0px solid black;</string>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">background: rgba(0,0,0,0);
-border: 0px solid black;</string>
+               <string notr="true">background: rgba(192, 97, 203, 0.2);
+border: 0px solid black;
+margin-left: 0px;
+margin-right: 0px;</string>
               </property>
               <property name="text">
                <string>Dry</string>
@@ -618,8 +614,10 @@ border: 0px solid black;</string>
                </font>
               </property>
               <property name="styleSheet">
-               <string notr="true">background: rgba(0,0,0,0);
-border: 0px solid black;</string>
+               <string notr="true">background: rgba(192, 97, 203, 0.2);
+border: 0px solid black;
+margin-left: 0px;
+margin-right: 0px;</string>
               </property>
               <property name="text">
                <string>Turbo</string>
@@ -631,10 +629,10 @@ border: 0px solid black;</string>
           <item row="1" column="4">
            <spacer name="horizontalSpacer_10">
             <property name="orientation">
-             <enum>Qt::Horizontal</enum>
+             <enum>Qt::Orientation::Horizontal</enum>
             </property>
             <property name="sizeType">
-             <enum>QSizePolicy::Minimum</enum>
+             <enum>QSizePolicy::Policy::Minimum</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
@@ -696,7 +694,7 @@ QComboBox::drop-down{
         <item row="0" column="2">
          <spacer name="horizontalSpacer_3">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Orientation::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -934,7 +932,7 @@ background: rgba(0,0,0,0,);
         <item row="0" column="2">
          <spacer name="horizontalSpacer_4">
           <property name="orientation">
-           <enum>Qt::Horizontal</enum>
+           <enum>Qt::Orientation::Horizontal</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
@@ -1053,7 +1051,7 @@ margin:5px;</string>
                <x>0</x>
                <y>0</y>
                <width>935</width>
-               <height>894</height>
+               <height>890</height>
               </rect>
              </property>
              <layout class="QVBoxLayout" name="verticalLayout_3">
