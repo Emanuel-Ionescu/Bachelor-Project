@@ -134,7 +134,9 @@ def main():
                     x1, x2, y1, y2, args = slice_info
                     _, xa, _ = args.split(',')[0].split(':')
                     _, ya, _ = args.split(',')[1].split(':')
-                    slice_faces = AI.find_faces(frame[x1 : x2, y1 : y2])
+                    aux = frame[x1 : x2, y1 : y2]
+                    print(aux.shape)
+                    slice_faces = AI.find_faces(aux)
                     if slice_faces is not None:
                         for f in slice_faces:
                             f_aux = f
