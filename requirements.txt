@@ -1,0 +1,6 @@
+pycryptodome
+tflite
+opencv-python
+pytapo
+requests
+tflite_runtime
