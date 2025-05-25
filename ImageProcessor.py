@@ -130,8 +130,8 @@ def main():
             # recursive splitting the frame
             if faces is None:
                 faces = []
-                for slice in FRAME_SLICE_INFO:
-                    x1, x2, y1, y2, args = slice_faces
+                for slice_info in FRAME_SLICE_INFO:
+                    x1, x2, y1, y2, args = slice_info
                     _, xa, _ = args.split(',')[0].split(':')
                     _, ya, _ = args.split(',')[1].split(':')
                     slice_faces = AI.find_faces(frame[x1 : x2, y1 : y2])
