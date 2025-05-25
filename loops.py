@@ -130,7 +130,7 @@ class UpdateCamera(QThread):
                 self.frame = [self.raw_frame[i * 720 : (i + 1) * 720, :, :] for i in range(self.used_cams)] 
 
                 for i in range(self.used_cams):
-                    self.IS[i].send(self.frame[i], "all,w:0.0:1.0,h:0.0:1.0")
+                    # self.IS[i].send(self.frame[i], "all,w:0.0:1.0,h:0.0:1.0") # NO LONGER USED -> 2 rtsp streams as tested to be OK
                     
                     if self.AI_data[i] is not None:
                         recv_time = float(self.AI_data[i]["sent-time"][1:])
