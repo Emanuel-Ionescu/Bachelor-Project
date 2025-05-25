@@ -9,7 +9,7 @@ import subprocess
 from typing import Dict, List
 from operator import itemgetter
 
-DEFAULT_DETECTION_ACCURACY = 0.15
+DEFAULT_DETECTION_ACCURACY = 0.1
 DEFAULT_RECOGNITION_ACCURACY = 0.81
 
 DEFAULT_BODY_ACCURACY = 0.2
