@@ -33,15 +33,15 @@ class ImageSender:
 
         ID = str(int(time.time() * 1000))
         slice_index = 0
-        self.sock.sendto(f"start/{ID}/{rows}/{cols}/{s_height}/{s_width}".encode())
-        self.sock.sendto(aux_data.encode())
+        self.sock.sendto(f"start/{ID}/{rows}/{cols}/{s_height}/{s_width}".encode(), (self.dest_ip, self.dest_port))
+        self.sock.sendto(aux_data.encode(), (self.dest_ip, self.dest_port))
         for i in range(1, rows):
             for e in range(1, cols):
                 slice_index += 1
                 s_frame = frame[ (i-1) * s_height : i * s_height, (e-1) * s_width : e * s_width]
                 _, buffer = cv2.imencode('.jpg',s_frame,(cv2.IMWRITE_JPEG_QUALITY,90))
                 self.sock.sendto(f"{slice_index:02d}".encode() + bytes(buffer), (self.dest_ip, self.dest_port)) 
-        self.sock.sendto(f"end/{ID}".encode())
+        self.sock.sendto(f"end/{ID}".encode(), (self.dest_ip, self.dest_port))
 
 
 class ImageReceiver:
