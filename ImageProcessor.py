@@ -142,9 +142,7 @@ def main():
                     face = np.array(face, np.int32)
 
                     cropped_frame = frame[face[0] : face[2], face[1] : face[3]]
-                    ECHO("Math made")
                     #mask = AI.id_face(cropped_frame)
-                    ECHO("ID ready")
                     #to_be_sent["masks"].append(str(mask)[1:-1])
             else:
                 print("None")
@@ -162,7 +160,7 @@ def main():
                     }
             else:
                 print("None")
-                
+
         to_be_sent["ID"] = ID
         to_be_sent["offset"] = width + "," + height
         to_be_sent["sent-time"] = "t" + str(time.time())
