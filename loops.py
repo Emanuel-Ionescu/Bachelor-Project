@@ -42,7 +42,7 @@ FRAME_SLICE_INFO = [
     [0                          , int(CAMERA_RESOLUTION[0]/2)    , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "face,w:0.50:0.5,h:0.00:0.5"],
     [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , 0                          , int(CAMERA_RESOLUTION[1]/2)    , "face,w:0.00:0.5,h:0.50:0.5"],
     [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "face,w:0.50:0.5,h:0.50:0.5"]
-            ]
+]
 
 class VideoFakeCam():  
     def __init__(self):
@@ -160,6 +160,9 @@ class UpdateCamera(QThread):
                                     (255, 0, 0, 255), 6)
                         except:
                             print("No face found!", "CAM", i)
+                            for slice in FRAME_SLICE_INFO:
+                                x1, x2, y1, y2, msg = slice
+                                self.IS[i].send(self.frame[i][x1:x2, y1:y2], msg)
                             
                         self.AI_data[i] = None
 
