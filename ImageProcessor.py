@@ -83,7 +83,7 @@ def main():
     
     ok, raw_frame = cam.read()
     frame = raw_frame[(ID - 1) * 720 : ID * 720, :, :]  
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
 
     faces = AI.find_faces(frame)
     body = AI.find_body(frame)
@@ -97,7 +97,9 @@ def main():
         print("                         \rFPS:", 1/(time.time() - fps_time), end='\r')
         fps_time =  time.time()
         to_be_sent = {}
-        ok, frame = cam.read()
+        ok, raw_frame = cam.read()
+        frame = raw_frame[(ID - 1) * 720 : ID * 720, :, :]  
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGRA2BGR)
         option = "all"
 
         # if(option == "add"):
