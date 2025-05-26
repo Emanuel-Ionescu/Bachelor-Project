@@ -58,6 +58,7 @@ def main(ID : int, frame_queue : mpc.Queue):
 
     IS = ImageSender(IMAGE_PROCESSORS[ID-1]["IP"], IMAGE_PROCESSORS[ID-1]["PORT"])
     FDBK = UDPSender(FEEDBACKS[ID-1]["IP"], FEEDBACKS[ID-1]["PORT"])
+    frame = frame_queue.get(block=True)
     faces = AI.find_faces(frame)
     body = AI.find_body(frame)
     fps_time = time.time()
