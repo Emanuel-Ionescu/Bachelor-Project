@@ -7,7 +7,7 @@ CAMERAS = list(hardware_data["Camera"].values())
 IMAGE_PROCESSORS = [
     hardware_data["Platform"]["ImageProcessing1"],
     hardware_data["Platform"]["ImageProcessing2"]
-    ]
+]
 
 FEEDBACKS = [
     hardware_data["Platform"]["GUIFeedback1"],

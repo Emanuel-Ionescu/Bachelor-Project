@@ -322,6 +322,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     widget = MainWindow()
     widget.showFullScreen()
-    sys.exit(app.exec())
     import time
     time.sleep(100)
+    sys.exit(app.exec())
+    
