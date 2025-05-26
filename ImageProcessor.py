@@ -112,12 +112,14 @@ def main(ID : int, frame_queue : mpc.Queue):
             # recursive splitting the frame
             if faces is None:
                 faces = []
+                index = 0
                 for slice_info in FRAME_SLICE_INFO:
                     x1, x2, y1, y2, args = slice_info
                     _, xa, _ = args.split(',')[0].split(':')
                     _, ya, _ = args.split(',')[1].split(':')
                     aux = frame.copy()[y1 : y2, x1 : x2]
                     slice_faces = AI.find_faces(aux)
+                    cv2.imshow(str(index), aux)
                     if slice_faces is not None:
                         for f in slice_faces:
                             f_aux = f
@@ -126,6 +128,7 @@ def main(ID : int, frame_queue : mpc.Queue):
                             f_aux[0][2] += float(ya)
                             f_aux[0][3] += float(xa)
                             faces.append(f_aux)
+                cv2.waitKey(1)
 
             if faces is not [] or faces != []:
                 print(len(faces))
