@@ -17,11 +17,11 @@ TAPO_CAM_AUTH = {
 }
 CAMERA_RESOLUTION = (1280, 720)
 FRAME_SLICE_INFO = [
-    [int(CAMERA_RESOLUTION[0]/4), int(3 * CAMERA_RESOLUTION[0]/4), int(CAMERA_RESOLUTION[1]/4), int(3 * CAMERA_RESOLUTION[1]/4), "w:0.25:0.5,h:0.25:0.5"], 
-    [0                          , int(CAMERA_RESOLUTION[0]/2)    , 0                          , int(CAMERA_RESOLUTION[1]/2)    , "w:0.00:0.5,h:0.00:0.5"],
-    [0                          , int(CAMERA_RESOLUTION[0]/2)    , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "w:0.50:0.5,h:0.00:0.5"],
-    [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , 0                          , int(CAMERA_RESOLUTION[1]/2)    , "w:0.00:0.5,h:0.50:0.5"],
-    [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , "w:0.50:0.5,h:0.50:0.5"]
+    [int(CAMERA_RESOLUTION[0]/4), int(3 * CAMERA_RESOLUTION[0]/4), int(CAMERA_RESOLUTION[1]/4), int(3 * CAMERA_RESOLUTION[1]/4), (0.25 , 0.25)], 
+    [0                          , int(CAMERA_RESOLUTION[0]/2)    , 0                          , int(CAMERA_RESOLUTION[1]/2)    , (0.00 , 0.00)],
+    [0                          , int(CAMERA_RESOLUTION[0]/2)    , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , (0.50 , 0.00)],
+    [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , 0                          , int(CAMERA_RESOLUTION[1]/2)    , (0.00 , 0.50)],
+    [int(CAMERA_RESOLUTION[0]/2), CAMERA_RESOLUTION[0]           , int(CAMERA_RESOLUTION[1]/2), CAMERA_RESOLUTION[1]           , (0.50 , 0.50)]
 ]
 
 from HumanDetection import Model
@@ -116,18 +116,16 @@ def main(ID : int, frame_queue : mpc.Queue):
                 for slice_info in FRAME_SLICE_INFO:
                     index += 1
                     x1, x2, y1, y2, args = slice_info
-                    _, xa, _ = args.split(',')[0].split(':')
-                    _, ya, _ = args.split(',')[1].split(':')
                     aux = frame.copy()[y1 : y2, x1 : x2]
                     slice_faces = AI.find_faces(aux)
                     cv2.imshow(str(index), aux)
                     if slice_faces is not None:
                         for f in slice_faces:
                             f_aux = f
-                            f_aux[0][0] += float(ya)
-                            f_aux[0][1] += float(xa)
-                            f_aux[0][2] += float(ya)
-                            f_aux[0][3] += float(xa)
+                            f_aux[0][0] += args[0]
+                            f_aux[0][1] += args[1]
+                            f_aux[0][2] += args[0]
+                            f_aux[0][3] += args[1]
                             faces.append(f_aux)
                 cv2.waitKey(1)
 

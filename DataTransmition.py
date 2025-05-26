@@ -11,11 +11,11 @@ class ImageSender:
     def __init__(self, DEST_IP_ADDR, DEST_PORT):
         self.dest_ip = DEST_IP_ADDR
         self.dest_port = DEST_PORT
-        self.resolution = (300, 300)
+        self.resolution = (400, 400)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         print("Image sender created:", self.dest_ip, self.dest_port)
 
-    def send(self, frame = None, aux_data : str = " "):
+    def send(self, frame = None):
         if frame is None:
             return
         if len(aux_data) > 32:
@@ -26,7 +26,7 @@ class ImageSender:
         s_frame = cv2.resize(frame, self.resolution, cv2.INTER_LINEAR) # to be changd if nedded
         s_frame = cv2.cvtColor(s_frame, cv2.COLOR_BGR2RGB)
 
-        _, buffer = cv2.imencode('.jpg',s_frame,(cv2.IMWRITE_JPEG_QUALITY,80))
+        _, buffer = cv2.imencode('.jpg',s_frame,(cv2.IMWRITE_JPEG_QUALITY,50))
         self.sock.sendto(aux_data.encode() + bytes(buffer), (self.dest_ip, self.dest_port))
 
 
@@ -43,10 +43,9 @@ class ImageReceiver:
 
     def receive(self):
         buffer, _ = self.sock.recvfrom(65000)
-        aux_data = buffer[:32]
-        nparr = np.frombuffer(buffer[32:],np.uint8)
+        nparr = np.frombuffer(buffer,np.uint8)
         img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-        return aux_data.decode(), img
+        return img
 
 
 class UDPSender:
