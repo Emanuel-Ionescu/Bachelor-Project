@@ -184,8 +184,8 @@ def main(ID : int, frame_queue : mpc.Queue):
 
 if __name__ == "__main__":
     proc = [
-        mpc.Process(target=main, args=(0, FRAME_QUEUES[0])),
-        mpc.Process(target=main, args=(1, FRAME_QUEUES[1]))
+        mpc.Process(target=main, args=(1, FRAME_QUEUES[0])),
+        mpc.Process(target=main, args=(2, FRAME_QUEUES[1]))
     ]
 
     proc[0].start()
