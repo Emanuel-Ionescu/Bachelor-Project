@@ -37,12 +37,13 @@ class UpdateCamera(QThread):
     
     def __init__(self):
         super().__init__()
-        self.AI_data.append(None)
+        self.AI_data = [None, None]
         self.IR = [
             DataTransmition.ImageReceiver(IMAGE_PROCESSORS[0]["IP"], IMAGE_PROCESSORS[0]["PORT"]),
             DataTransmition.ImageReceiver(IMAGE_PROCESSORS[1]["IP"], IMAGE_PROCESSORS[1]["PORT"])
         ]
         self.frame = [None, None]
+        self.used_cams = 2
         
     def run(self):
         ok = True
@@ -50,8 +51,8 @@ class UpdateCamera(QThread):
             if ok:                
                 for i in range(self.used_cams):
                     _, self.frame[i] = self.IR[i].receive()
-                    self.frame = cv2.cvtColor(self.frame, cv2.COLOR_BGR2RGBA)
-                    
+                    self.frame[i] = cv2.cvtColor(self.frame[i], cv2.COLOR_BGR2RGBA)
+
                     if self.AI_data[i] is not None:
                         recv_time = float(self.AI_data[i]["sent-time"][1:])
                         try:
