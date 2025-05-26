@@ -16,18 +16,18 @@ class ImageSender:
         print("Image sender created:", self.dest_ip, self.dest_port)
 
     def send(self, frame = None):
-        if frame is None:
-            return
-        if len(aux_data) > 32:
-            aux_data = aux_data[:32]
-        elif len(aux_data) < 32:
-            aux_data = aux_data.ljust(32)
+        # if frame is None:
+        #     return
+        # if len(aux_data) > 32:
+        #     aux_data = aux_data[:32]
+        # elif len(aux_data) < 32:
+        #     aux_data = aux_data.ljust(32)
 
         s_frame = cv2.resize(frame, self.resolution, cv2.INTER_LINEAR) # to be changd if nedded
         s_frame = cv2.cvtColor(s_frame, cv2.COLOR_BGR2RGB)
 
         _, buffer = cv2.imencode('.jpg',s_frame,(cv2.IMWRITE_JPEG_QUALITY,50))
-        self.sock.sendto(aux_data.encode() + bytes(buffer), (self.dest_ip, self.dest_port))
+        self.sock.sendto(bytes(buffer), (self.dest_ip, self.dest_port))
 
 
 class ImageReceiver:
