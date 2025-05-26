@@ -8,10 +8,10 @@ import socket
 
 class ImageSender:
 
-    def __init__(self, DEST_IP_ADDR, DEST_PORT, RESOLUTION):
+    def __init__(self, DEST_IP_ADDR, DEST_PORT):
         self.dest_ip = DEST_IP_ADDR
         self.dest_port = DEST_PORT
-        self.resolution = RESOLUTION
+        self.resolution = (300, 300)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         print("Image sender created:", self.dest_ip, self.dest_port)
 

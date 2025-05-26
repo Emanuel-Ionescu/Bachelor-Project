@@ -39,8 +39,8 @@ class UpdateCamera(QThread):
         super().__init__()
         self.AI_data.append(None)
         self.IR = [
-            DataTransmition.ImageReceiver(IMAGE_PROCESSORS[0]["IP"], IMAGE_PROCESSORS[0]["PORT"], [300, 300]),
-            DataTransmition.ImageReceiver(IMAGE_PROCESSORS[1]["IP"], IMAGE_PROCESSORS[1]["PORT"], [300, 300])
+            DataTransmition.ImageReceiver(IMAGE_PROCESSORS[0]["IP"], IMAGE_PROCESSORS[0]["PORT"]),
+            DataTransmition.ImageReceiver(IMAGE_PROCESSORS[1]["IP"], IMAGE_PROCESSORS[1]["PORT"])
         ]
         self.frame = [None, None]
         
