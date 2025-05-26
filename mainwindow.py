@@ -323,3 +323,5 @@ if __name__ == "__main__":
     widget = MainWindow()
     widget.showFullScreen()
     sys.exit(app.exec())
+    import time
+    time.sleep(100)
