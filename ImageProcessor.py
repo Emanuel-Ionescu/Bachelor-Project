@@ -120,9 +120,7 @@ def main(ID : int, frame_queue : mpc.Queue):
                     x1, x2, y1, y2, args = slice_info
                     _, xa, _ = args.split(',')[0].split(':')
                     _, ya, _ = args.split(',')[1].split(':')
-                    print(frame.shape)
                     aux = frame.copy()[y1 : y2, x1 : x2]
-                    print(aux.shape)
                     slice_faces = AI.find_faces(aux)
                     if slice_faces is not None:
                         for f in slice_faces:
@@ -197,7 +195,7 @@ if __name__ == "__main__":
         ok = True
         while ok:
             ok, raw_frame = CAM.read()
-            raw_frame = cv2.cvtColor(raw_frame, cv2.COLOR_BGRA2BGR)
+            raw_frame = cv2.cvtColor(raw_frame, cv2.COLOR_RGBA2BGR)
             frame = [raw_frame[i * 720 : (i + 1) * 720, :, :] for i in range(2)]
             for i in range(2):
                 if FRAME_QUEUES[i].empty():

@@ -52,6 +52,7 @@ class UpdateCamera(QThread):
                 for i in range(self.used_cams):
                     _, self.frame[i] = self.IR[i].receive()
                     self.frame[i] = cv2.cvtColor(self.frame[i], cv2.COLOR_BGR2RGBA)
+                    self.frame[i] = cv2.resize(self.frame[i], (1280, 720))
 
                     if self.AI_data[i] is not None:
                         recv_time = float(self.AI_data[i]["sent-time"][1:])
