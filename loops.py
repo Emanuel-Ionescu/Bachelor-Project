@@ -82,6 +82,14 @@ class UpdateCamera(QThread):
                                     (255, 0, 0, 255), 6)
                         except:
                             print("No face found!", "CAM", i)
+
+                        try:
+                            for X, Y in zip(self.AI_data[i]["body"]['x'], self.AI_data[i]["body"]['y']):
+                                self.frame[i] = cv2.rectangle(
+                                    self.frame[i], 
+                                    (X-2, Y-2), (X+2, Y+2), (0, 255, 0, 255), -1)
+                        except:
+                            print("No body detected!", "CAM", i)
                             
                         self.AI_data[i] = None
 
