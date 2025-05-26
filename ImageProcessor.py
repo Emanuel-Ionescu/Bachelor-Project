@@ -75,6 +75,7 @@ def main(ID : int, frame_queue : mpc.Queue):
         fps_time =  time.time()
         to_be_sent = {}
         frame = frame_queue.get()
+        IS.send(frame)
         # message = message.split()[0]
         # option, width, height = message.split(',')
         option = "all"
