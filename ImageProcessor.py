@@ -68,13 +68,22 @@ def main():
     t1.join()
     print("ML loaded in", loading_time, "seconds")
 
-    pipeline = 'rtspsrc location="rtsp://{cam1_u}:{cam1_p}@{cam1_ip}/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! appsink sync=false'.format(
+    pipeline = 'imxcompositor_g2d name=comp sink_0::xpos=0 sink_0::ypos=0 sink_1::xpos=0 sink_1::ypos=720 ' \
+                '! queue ! appsink sync=false rtspsrc location="rtsp://{cam1_u}:{cam1_p}@{cam1_ip}/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ' \
+                '! queue ! comp. rtspsrc location="rtsp://{cam2_u}:{cam2_p}@{cam2_ip}/stream2" ! rtph264depay ! h264parse ! queue ! v4l2h264dec ! queue ! comp.'.format(
                 cam1_u  = TAPO_CAM_AUTH["User"],
                 cam1_p  = TAPO_CAM_AUTH["Password"],
-                cam1_ip = CAMERAS[ID-1]["IP"] 
+                cam1_ip = CAMERAS[0]["IP"],
+                cam2_u  = TAPO_CAM_AUTH["User"],
+                cam2_p  = TAPO_CAM_AUTH["Password"],
+                cam2_ip = CAMERAS[1]["IP"] 
             )
+    
     cam = cv2.VideoCapture(pipeline, cv2.CAP_GSTREAMER)
-    ok, frame = cam.read()
+    
+    ok, raw_frame = cam.read()
+    frame = raw_frame[(ID - 1) * 720 : ID * 720, :, :]  
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2BGRA)
 
     faces = AI.find_faces(frame)
     body = AI.find_body(frame)
