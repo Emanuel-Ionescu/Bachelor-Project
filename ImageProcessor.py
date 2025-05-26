@@ -70,14 +70,10 @@ def main(ID : int, frame_queue : mpc.Queue):
             time.sleep(0.02)
             continue
 
-        os.system("clear")
-        print("                         \rFPS:", 1/(time.time() - fps_time), end='\r')
         fps_time =  time.time()
         to_be_sent = {}
         frame = frame_queue.get()
         IS.send(frame)
-        # message = message.split()[0]
-        # option, width, height = message.split(',')
         option = "all"
 
         # if(option == "add"):
@@ -125,10 +121,10 @@ def main(ID : int, frame_queue : mpc.Queue):
                     if slice_faces is not None:
                         for f in slice_faces:
                             f_aux = f
-                            f_aux[0][0] += float(xa)
-                            f_aux[0][1] += float(ya)
-                            f_aux[0][2] += float(xa)
-                            f_aux[0][3] += float(ya)
+                            f_aux[0][0] += float(ya)
+                            f_aux[0][1] += float(xa)
+                            f_aux[0][2] += float(ya)
+                            f_aux[0][3] += float(xa)
                             faces.append(f_aux)
 
             if faces is not [] or faces != []:
@@ -158,27 +154,23 @@ def main(ID : int, frame_queue : mpc.Queue):
                     cropped_frame = frame[face[0] : face[2], face[1] : face[3]]
                     #mask = AI.id_face(cropped_frame)
                     #to_be_sent["masks"].append(str(mask)[1:-1])
-            else:
-                print("None")
-
-        print("Body: ", end="")
+            
 
         if(option == "all" or option == "body"):
             body = AI.find_body(frame)
             if body is not None:
-                print("Found")
                 to_be_sent["body"] = {
                         "x"     : np.array(body[0], dtype=np.int32).tolist(),
                         "y"     : np.array(body[1], dtype=np.int32).tolist(),
                         # "score" : np.array(body[2], dtype=np.int32).tolist()
                     }
-            else:
-                print("None")
 
         to_be_sent["ID"] = ID
         to_be_sent["offset"] = "0,0"
         to_be_sent["sent-time"] = "t" + str(time.time())
         FDBK.send(json.dumps(to_be_sent))
+
+        print(ID, "FPS:", 1/(time.time() - fps_time), "Faces:", len(faces), "Body:", body != None)
 
 
 if __name__ == "__main__":
