@@ -196,6 +196,7 @@ if __name__ == "__main__":
         ok = True
         while ok:
             ok, raw_frame = CAM.read()
+            raw_frame = cv2.cvtColor(raw_frame, cv2.COLOR_BGRA2BGR)
             frame = [raw_frame[i * 720 : (i + 1) * 720, :, :] for i in range(2)]
             for i in range(2):
                 if FRAME_QUEUES[i].empty():
