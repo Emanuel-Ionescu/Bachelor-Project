@@ -198,7 +198,7 @@ def main():
                 print("None")
 
         to_be_sent["ID"] = ID
-        to_be_sent["offset"] = width + "," + height
+        to_be_sent["offset"] = "0,0"
         to_be_sent["sent-time"] = "t" + str(time.time())
         FDBK.send(json.dumps(to_be_sent))
 
